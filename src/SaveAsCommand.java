@@ -28,7 +28,7 @@ public class SaveAsCommand implements Command {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            String content = textEditor.getContent(); // Fetching content from TextEditor
+            String content = textEditor.getContent();
             writer.write(content);
             System.out.println("File saved as " + fileName);
         } catch (IOException e) {

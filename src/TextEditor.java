@@ -19,8 +19,6 @@ public class TextEditor implements FileOperations {
 
     @Override
     public void open(String fileName) {
-//        System.out.println("Successfully opened " + fileName);
-//        currentFile = fileName;
 
         System.out.println("Successfully opened " + fileName);
         currentFile = fileName;
@@ -33,17 +31,6 @@ public class TextEditor implements FileOperations {
         currentFile = null;
         content = null;
     }
-
-    @Override
-//    public void save() {
-//        System.out.println("Successfully saved " + currentFile);
-//    }
-//
-//    @Override
-//    public void saveAs(String fileName) {
-//        System.out.println("Successfully saved as " + fileName);
-//        currentFile = fileName;
-//    }
 
     public void save() {
         if (currentFile != null && content != null) {
@@ -59,7 +46,7 @@ public class TextEditor implements FileOperations {
         System.out.println("Successfully saved as " + fileName);
         currentFile = fileName;
         if (content != null) {
-            writeFileContent(fileName, content); // Save content to the specified file
+            writeFileContent(fileName, content);
         } else {
             System.out.println("No content to save.");
         }
