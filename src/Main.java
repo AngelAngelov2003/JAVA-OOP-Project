@@ -7,8 +7,8 @@ public class Main {
 
         System.out.println("Welcome!");
 
-        while (true){
-            System.out.print("> ");
+        while(true) {
+            System.out.println("> ");
             String commandLine = scanner.nextLine();
             editor.executeCommand(commandLine);
         }

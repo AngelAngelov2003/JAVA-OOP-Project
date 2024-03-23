@@ -3,4 +3,5 @@ public interface FileOperations {
     void close();
     void save();
     void saveAs(String fileName);
+    boolean isOpen();
 }
