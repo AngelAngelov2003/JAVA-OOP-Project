@@ -6,6 +6,7 @@ public class SaveCommand implements Command {
     }
 
     public void execute(String[] args) {
-        fileOperations.save();
+
+        fileOperations.save(args[1]);
     }
 }

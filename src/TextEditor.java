@@ -32,10 +32,16 @@ public class TextEditor implements FileOperations {
         content = null;
     }
 
-    public void save() {
-        if (currentFile != null && content != null) {
-            writeFileContent(currentFile, content); // Save content to file
-            System.out.println("Successfully saved " + currentFile);
+    public void save(String fileContent) {
+        if (currentFile != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentFile, true))) {
+                writer.write(content);
+                writer.newLine();
+                System.out.println("Successfully saved content to " + currentFile);
+            } catch (IOException e) {
+                System.out.println("Error occurred while saving to the file.");
+                e.printStackTrace();
+            }
         } else {
             System.out.println("No file is currently open.");
         }
