@@ -13,31 +13,6 @@ public class OpenCommand implements Command {
             return;
         }
         String fileName = args[1];
-        openFile(fileName);
-    }
-
-    private void openFile(String fileName) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            StringBuilder content = new StringBuilder();
-            String line;
-
-            while((line = reader.readLine()) != null){
-                content.append(line).append("\n");
-            }
-
-            System.out.println("File content:\n" + content);
-            fileOperations.open(fileName);
-        } catch (IOException e) {
-
-            System.out.println("This file does not exist. Creating the file:\n");
-            try {
-               if(new File(fileName).createNewFile()) {
-                    System.out.println("File created successfully!");
-                    fileOperations.open(fileName);
-               }
-            } catch (IOException ex) {
-                System.out.println("Error: Unable to create the wanted file.");
-            }
-        }
+        fileOperations.open(fileName);
     }
 }

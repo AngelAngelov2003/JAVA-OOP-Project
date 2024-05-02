@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<note>
-    <to>Tove</to>
-    <from>Jani</from>
-    <heading>Reminder</heading>
-    <body>Don't forget me this weekend!</body>
-</note>
-
-
+<people>
+<person id="0">
+<name>Angel Angelov</name>
+<address>Bulgaria</address>
+</person>
+<person id="1">
+<name>Ivan Petrov</name>
+<address>Bulgaria</address>
+</person>
+</people>
