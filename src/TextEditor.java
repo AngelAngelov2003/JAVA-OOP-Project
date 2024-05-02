@@ -28,6 +28,9 @@ public class TextEditor implements FileOperations {
         commands.put("print", new PrintCommand(this));
         commands.put("select", new SelectCommand(this));
         commands.put("set", new SetCommand(this));
+        commands.put("children", new ChildrenCommand(this));
+        commands.put("child", new ChildCommand(this));
+        commands.put("text", new TextCommand(this));
     }
 
     @Override

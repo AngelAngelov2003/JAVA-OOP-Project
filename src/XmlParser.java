@@ -8,6 +8,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XmlParser {
 
@@ -67,6 +69,62 @@ public class XmlParser {
             System.out.println("Attribute '" + key + "' not found for element with id " + id);
         } else {
             System.out.println("Element with id " + id + " not found.");
+        }
+    }
+
+    public List<String> children(String id) throws XPathExpressionException {
+        List<String> childrenList = new ArrayList<>();
+        Element element = getElementById(id);
+        if (element != null) {
+            NodeList childNodes = element.getChildNodes();
+            for (int i = 0; i < childNodes.getLength(); i++) {
+                Node child = childNodes.item(i);
+                if (child.getNodeType() == Node.ELEMENT_NODE) {
+                    String childName = ((Element) child).getTagName();
+                    childrenList.add(childName);
+                }
+            }
+        } else {
+            System.out.println("Element with id " + id + " not found.");
+        }
+        return childrenList;
+    }
+
+    public String child(String id, int n) throws XPathExpressionException {
+        Element element = getElementById(id);
+        if (element != null) {
+            NodeList childNodes = element.getChildNodes();
+            int count = 0;
+            for (int i = 0; i < childNodes.getLength(); i++) {
+                Node child = childNodes.item(i);
+                if (child.getNodeType() == Node.ELEMENT_NODE) {
+                    count++;
+                    if (count == n) {
+                        return ((Element) child).getTagName();
+                    }
+                }
+            }
+        } else {
+            System.out.println("Element with id " + id + " not found.");
+        }
+        return null;
+    }
+
+    public String text(String id) throws XPathExpressionException {
+        Element element = getElementById(id);
+        if (element != null) {
+            StringBuilder textContent = new StringBuilder();
+            NodeList childNodes = element.getChildNodes();
+            for (int i = 0; i < childNodes.getLength(); i++) {
+                Node child = childNodes.item(i);
+                if (child.getNodeType() == Node.ELEMENT_NODE) {
+                    textContent.append(((Element) child).getTextContent().trim()).append("\n");
+                }
+            }
+            return textContent.toString().trim();
+        } else {
+            System.out.println("Element with id " + id + " not found.");
+            return null;
         }
     }
 
