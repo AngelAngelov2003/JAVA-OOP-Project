@@ -7,4 +7,9 @@
 <name>Ivan Petrov</name>
 <address>Bulgaria</address>
 </person>
+<person delete="delete" id="2">
+<name>Boyan Angelov</name>
+<address>Bulgaria</address>
+<newchild id="new_id"/>
+</person>
 </people>

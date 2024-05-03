@@ -31,6 +31,8 @@ public class TextEditor implements FileOperations {
         commands.put("children", new ChildrenCommand(this));
         commands.put("child", new ChildCommand(this));
         commands.put("text", new TextCommand(this));
+        commands.put("delete", new DeleteCommand(this));
+        commands.put("newchild", new NewChildCommand(this));
     }
 
     @Override

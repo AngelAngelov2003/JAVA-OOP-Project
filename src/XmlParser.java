@@ -1,8 +1,8 @@
 import org.w3c.dom.*;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -49,7 +49,7 @@ public class XmlParser {
     }
 
     public String select(String id, String key) throws XPathExpressionException {
-        XPathExpression expr = xpath.compile("//person[@id='" + id + "']/" + key);
+        XPathExpression expr = xpath.compile("//*[@id='" + id + "']/" + key);
         return (String) expr.evaluate(doc, XPathConstants.STRING);
     }
 
@@ -128,6 +128,41 @@ public class XmlParser {
         }
     }
 
+    public void delete(String id, String key) throws Exception {
+        Element element = getElementById(id);
+        if (element != null) {
+            Attr attr = element.getAttributeNode(key);
+            if (attr != null) {
+                element.removeAttributeNode(attr);
+                writeXmlToFile(filePath);
+                System.out.println("Attribute '" + key + "' deleted from element with id " + id);
+            } else {
+                System.out.println("Attribute '" + key + "' not found for element with id " + id);
+            }
+        } else {
+            System.out.println("Element with id " + id + " not found.");
+        }
+    }
+
+    public void newchild(String id) throws IOException {
+        Element element = getElementById(id);
+        if (element != null) {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            try {
+                Element newChild = doc.createElement("newchild");
+                newChild.setAttribute("id", "new_id");
+                element.appendChild(newChild);
+
+                writeXmlToFile(filePath);
+                System.out.println("New child added to element with id " + id);
+            } catch (Exception e) {
+                System.out.println("Error occurred while adding new child: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Element with id " + id + " not found.");
+        }
+    }
+
     private void writeXmlToFile(String filePath) {
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -142,7 +177,7 @@ public class XmlParser {
             transformer.transform(source, result);
 
             System.out.println("Changes saved to the file.");
-        } catch (TransformerException e) {
+        } catch (Exception e) {
             System.out.println("Error occurred while saving changes to the file.");
             e.printStackTrace();
         }
